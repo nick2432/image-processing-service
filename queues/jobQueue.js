@@ -13,7 +13,7 @@ const jobQueue = new Queue('jobQueue', {
 
 const addJobToQueue = async (jobData) => {
     const job = await jobQueue.add('processJob', jobData);
-    console.log(`✅ Job added to queue: ${job.id}`);
+    console.log(`Job added to queue: ${job.id}`);
 };
 ;
 
