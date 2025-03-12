@@ -13,8 +13,8 @@ const startWorker = async () => {
     console.log('MongoDB Connected');
 
     const jobWorker = new Worker('jobQueue', async (job) => {
-        console.log(`🚀 Processing job: ${job.id}`);
-        console.log('🛠 Job Data:', job.data);
+        console.log(`Processing job: ${job.id}`);
+        console.log('Job Data:', job.data);
 
         const { job_id, visits } = job.data;
 
@@ -24,7 +24,7 @@ const startWorker = async () => {
             console.log(`⏳ Starting image processing for job: ${job_id}`);
 
             for (const visit of visits) {
-                console.log(`🔄 Processing images for store_id: ${visit.store_id}`);
+                console.log(`Processing images for store_id: ${visit.store_id}`);
 
                 try {
                     const result = await processImagesInWorker(visit);
@@ -45,7 +45,7 @@ const startWorker = async () => {
                         return; 
                     }
 
-                    console.log(`✅ Image processed for store_id: ${visit.store_id}`);
+                    console.log(`Image processed for store_id: ${visit.store_id}`);
 
                     await Job.findOneAndUpdate(
                         { job_id, 'visits.store_id': visit.store_id },
